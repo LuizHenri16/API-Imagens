@@ -21,4 +21,14 @@ public class ImageMapper {
                 .file(file.getBytes())         //Definir os bytes do arquivo                // metodo criado para filtrar o tipo recebido do arquivo
                 .build();
     }
+
+    public ImageDTO imageToDTO(Image image, String url) {
+        return ImageDTO.builder()
+                .name(image.getName())
+                .extension(image.getExtension().name())
+                .size(image.getSize())
+                .url(url)
+                .uploadDate(image.getUploadDate().toLocalDate())
+                .build();
+    }
 }

@@ -47,7 +47,7 @@ public class ImagesController {
         var possibleImage = imageService.getById(id);
 
         if (possibleImage.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // build é diferente do build do Lombok
         }
 
         var image = possibleImage.get();

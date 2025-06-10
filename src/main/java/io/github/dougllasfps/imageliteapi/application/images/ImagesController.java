@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/v1/images")
 @RequiredArgsConstructor // para
 @Slf4j
+@CrossOrigin("*")
 public class ImagesController {
 
     private final ImageServiceImpl imageService;
@@ -53,7 +54,7 @@ public class ImagesController {
             var images = result.stream().map(image -> {
                 var url = buildImageURL(image); // gerando url das imagens com o méttodo já criado
                 return imageMapper.imageToDTO(image, url.toString()); // retornando a imagem com a url
-            }).collect(Collectors.toList()); // transformando em uma lista de imagens
+            }).collect(Collectors.toList()); // transformando numa lista de imagens
             return ResponseEntity.ok(images); // OK e levando as imagens criadas
     }
 
@@ -75,7 +76,7 @@ public class ImagesController {
     }
 
     public URI buildImageURL(Image image) { // Aqui é para montar a URL da imagem ao colocar no banco de daoos
-        String path = "/" + image.getId(); // Crio o path com o id da imagem
+        String path = "/" + image.getId(); // Crio o path com o ‘id’ da imagem
         return ServletUriComponentsBuilder // É retornando a URL atual com o fromCurrentRequest passando o novo path "/+idImagem", que adiciona
                 .fromCurrentRequestUri()    // Com isso é montado, toUri para transformar na URI e depois retornar
                 .path(path)
